@@ -1,0 +1,104 @@
+# Ignore all node_modules directories
+node_modules/
+
+# Ignore build directories for Gradle projects
+**/build/
+
+# Ignore IDE-specific files
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Eclipse/STS
+.classpath
+.project
+.settings/
+.apt_generated/
+.factorypath/
+.sts4-cache/
+.springBeans/
+bin/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# VS Code
+.vscode/
+
+# Log files
+*.log
+
+# Dependency directories
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Ignore package lock files (Node.js)
+package-lock.json
+
+# Ignore Python virtual environments
+venv/
+
+# Ignore Docker data directories
+docker/mysql/data/
+inventory-service/docker/mysql/data/
+
+# Ignore specific OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Ignore private key files and certificates
+*.pem
+*.key
+
+# Ignore other config files containing sensitive information
+.env
+.env.local
+
+# Ignore compiled binaries and libraries
+*.class
+*.jar
+*.war
+*.ear
+*.dll
+*.exe
+*.so
+
+# Ignore specific files for Report and User Services
+Report Service/Nihad Gurbanov - Java Backend Developer - Resume.pdf
+Report Service/HELP.md
+User Service/HELP.md
+
+
+# Gradle files
+.gradle/
+!gradle-wrapper.jar
+
+# Python compiled files
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+
+# Ignore all output directories for Node.js and frontend tools
+aihr-frontend/node_modules/
+aihr-frontend/dist/
+aihr-frontend/.parcel-cache/
+aihr-frontend/.cache/
+
+# Ignore Tailwind CSS config file (if you don't want it in version control)
+tailwind.config.js
+
+# Miscellaneous
+*.tmp
+*.bak
+*.swp
+*.swo
+*.swn
+*.seed
