@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import { getReport } from "../services/ReportService";
 
-export const GetReportsComponent = () => {
-  const [userId, setUserId] = useState("");
-  const [reportId, setReportId] = useState("");
+export const GetReportsComponent = ({ userId, reportId, handleBack }) => {
   const [reportData, setReportData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -21,14 +19,9 @@ export const GetReportsComponent = () => {
       });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    fetchReport();
-  };
-
   useEffect(() => {
     if (userId && reportId) {
-      fetchReport(); // Directly call the API fetch here
+      fetchReport();
     }
   }, [userId, reportId]);
 
@@ -38,31 +31,8 @@ export const GetReportsComponent = () => {
 
   return (
     <div>
-      <h2>Report</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          User ID:
-          <input
-            type="text"
-            value={userId}
-            onChange={(e) => setUserId(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          Report ID:
-          <input
-            type="text"
-            value={reportId}
-            onChange={(e) => setReportId(e.target.value)}
-          />
-        </label>
-        <br />
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? "Loading..." : "Get Report"}
-        </button>
-      </form>
-
+      <button onClick={handleBack}>Back to Reports</button>
+      <h2>Report Details</h2>
       {isLoading ? (
         <p>Loading...</p>
       ) : (

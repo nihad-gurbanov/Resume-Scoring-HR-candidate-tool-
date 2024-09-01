@@ -2,6 +2,10 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:8081/report'; // http://localhost:8081/report/get?userId=2&reportId=2
 
+export const getAllReports = (userId) => {
+  return axios.get(`${API_URL}/get-all-reports?userId=${userId}`);
+};
+
 export const getReport = (userId, reportId) => {
   return axios.get(`${API_URL}/get?userId=${userId}&reportId=${reportId}`);
 }
