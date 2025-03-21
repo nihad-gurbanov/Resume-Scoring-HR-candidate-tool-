@@ -1,10 +1,11 @@
 package com.autorecruit.user.dto.response;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class UserResponseDTO {
     private Long userId;
     private String firstName;

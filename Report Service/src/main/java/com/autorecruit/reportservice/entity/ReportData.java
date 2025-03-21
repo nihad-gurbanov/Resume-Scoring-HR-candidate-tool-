@@ -20,11 +20,6 @@ public class ReportData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "report_id")
-//    private Report report;
-
-
     @OneToMany(mappedBy = "reportData", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Applicant> results;

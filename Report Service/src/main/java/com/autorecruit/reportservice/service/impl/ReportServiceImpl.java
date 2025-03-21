@@ -2,7 +2,6 @@ package com.autorecruit.reportservice.service.impl;
 
 
 import com.autorecruit.reportservice.dto.response.ReportResponseDTO;
-import com.autorecruit.reportservice.entity.Applicant;
 import com.autorecruit.reportservice.entity.Report;
 import com.autorecruit.reportservice.repository.ReportRepository;
 import com.autorecruit.reportservice.service.ReportDataService;

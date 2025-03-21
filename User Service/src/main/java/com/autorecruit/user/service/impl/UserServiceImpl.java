@@ -3,6 +3,7 @@ package com.autorecruit.user.service.impl;
 import com.autorecruit.user.dto.request.UserRequestDTO;
 import com.autorecruit.user.dto.response.UserResponseDTO;
 import com.autorecruit.user.entity.User;
+import com.autorecruit.user.exception.UserNotFoundException;
 import com.autorecruit.user.repository.UserRepository;
 import com.autorecruit.user.service.UserService;
 import lombok.AllArgsConstructor;
@@ -30,7 +31,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDTO getUser(Long id) {
-        return modelMapper.map(userRepository.findById(id).orElse(null), UserResponseDTO.class);
+        return modelMapper.map(userRepository.findById(id).orElseThrow(
+                () -> new UserNotFoundException("User with id " + id + " not found")
+        ), UserResponseDTO.class);
     }
 
     @Override
@@ -43,23 +46,34 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String updateUser(UserRequestDTO userRequestDTO, Long id) {
-        User user = userRepository.findById(id).orElse(null);
-        if (user == null) {
-            return "User with id " + id + " not found";
-        } else {
-            modelMapper.map(userRequestDTO, user);
-            userRepository.save(user);
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new UserNotFoundException("User with id " + id + " not found"));
+
+        // Update only if non-null and different
+        if (userRequestDTO.getFirstName() != null && !userRequestDTO.getFirstName().equals(user.getFirstName())) {
+            user.setFirstName(userRequestDTO.getFirstName());
         }
+        if (userRequestDTO.getLastName() != null && !userRequestDTO.getLastName().equals(user.getLastName())) {
+            user.setLastName(userRequestDTO.getLastName());
+        }
+        if (userRequestDTO.getEmail() != null && !userRequestDTO.getEmail().equals(user.getEmail())) {
+            user.setEmail(userRequestDTO.getEmail());
+        }
+
+        userRepository.save(user);
+
         return "User updated successfully";
     }
 
+
     @Override
     public String deleteUser(Long id) {
-        if (userRepository.existsById(id)) {
-            userRepository.deleteById(id);
-            return "User deleted successfully";
-        } else {
-            return "User with id " + id + " not found";
+        boolean exists = userRepository.existsById(id);
+        if (!exists) {
+            throw new UserNotFoundException("User with id " + id + " not found");
         }
+        userRepository.deleteById(id);
+
+        return "User deleted successfully";
     }
 }

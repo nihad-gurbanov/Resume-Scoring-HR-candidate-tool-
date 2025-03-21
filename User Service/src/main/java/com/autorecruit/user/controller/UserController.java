@@ -5,15 +5,19 @@ import com.autorecruit.user.dto.response.UserResponseDTO;
 import com.autorecruit.user.repository.UserRepository;
 import com.autorecruit.user.service.UserService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.hibernate.query.sqm.tree.SqmNode.log;
+
 @RestController
 @RequestMapping("/api/user")
 @AllArgsConstructor
+@Slf4j
 public class UserController {
     private final UserService userService;
     private final ModelMapper modelMapper;
@@ -22,7 +26,7 @@ public class UserController {
     @PostMapping("/register")
     public String register(@RequestBody UserRequestDTO userRequestDTO) {
         if (userRepository.existsByEmail(userRequestDTO.getEmail())) {
-            return "User with email " + userRequestDTO.getEmail() + " already exists";
+            throw new RuntimeException("User with email " + userRequestDTO.getEmail() + " already exists");
         }
 
         userService.createUser(userRequestDTO);
@@ -36,6 +40,7 @@ public class UserController {
 
     @GetMapping("/all")
     public List<UserResponseDTO> getAllUsers() {
+        log.info("Getting all users");
         return userService.getAllUsers().stream()
                 .map(user -> modelMapper.map(user, UserResponseDTO.class))
                 .collect(Collectors.toList());
