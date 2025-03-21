@@ -222,10 +222,7 @@ Here are some screenshots of the tool in action:
 *Caption: Recruiter tools.*
 
 ![User Profile](./screenshots/GenerateReport.png)
-*Caption: Recruiter report generation.*
-
-![User Profile](./screenshots/RecruiterTools.png)
-*Caption: Recruiter tools.*
+*Caption: Recruiter report generation.*g
 
 ![User Profile](./screenshots/RecruiterReports.png)
 *Caption: Recruiter reports.*
